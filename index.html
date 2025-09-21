@@ -15,7 +15,12 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #1a1a2e 70%, #0f0f23 100%);
+      background-image:
+        url('https://wallpapers-clan.com/wp-content/uploads/2024/08/autumn-japanese-gate-anime-desktop-wallpaper-preview.jpg'),
+        linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #1a1a2e 70%, #0f0f23 100%);
+      background-size: cover, cover;
+      background-position: center, center;
+      background-repeat: no-repeat, no-repeat;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -65,7 +70,7 @@
       width: 900px;
       max-width: 95vw;
       background: rgba(30, 30, 60, 0.4);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 24px;
       padding: 24px;
@@ -585,6 +590,66 @@
       font-size: 12px;
     }
 
+    /* Glassmorphism Popup Styles */
+    .glass-popup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      background: rgba(30,30,60,0.25);
+      backdrop-filter: blur(8px);
+      transition: opacity 0.3s;
+    }
+
+    .glass-content {
+      background: rgba(255,255,255,0.15);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 32px 28px;
+      text-align: center;
+      max-width: 340px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      backdrop-filter: blur(16px);
+    }
+
+    .glass-content h2 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .glass-content .highlight {
+      background: linear-gradient(90deg,#ff4757,#4a90e2);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .get-started-btn {
+      margin-top: 18px;
+      padding: 10px 24px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(135deg,#4a90e2,#ff4757);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(74,144,226,0.15);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .get-started-btn:hover {
+      background: linear-gradient(135deg,#ff4757,#4a90e2);
+      transform: scale(1.05);
+    }
+
     @media (max-width: 768px) {
       .dashboard-container {
         width: 100%;
@@ -805,6 +870,20 @@
     </div>
 
     <div id="player"></div>
+  </div>
+
+  <div id="glassPopup" class="glass-popup">
+    <div class="glass-content">
+      <h2>👋 Hi there, I'm <span class="highlight">Akash (sky)</span></h2>
+      <p>
+        Welcome to <b>Skywave</b>!<br>
+        This is a <b>Beta Test</b> version.<br>
+        You can load any YouTube playlist and enjoy seamless audio playback.<br>
+        Please report any bugs or feedback.<br>
+        <span style="opacity:0.7;">Happy listening!</span>
+      </p>
+      <button id="getStartedBtn" class="get-started-btn">Get Started</button>
+    </div>
   </div>
 
   <script>
@@ -1183,6 +1262,13 @@
       if (e.key === 'Enter') {
         document.getElementById('loadBtn').click();
       }
+    });
+
+    document.getElementById('getStartedBtn').addEventListener('click', function() {
+      document.getElementById('glassPopup').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('glassPopup').style.display = 'none';
+      }, 300);
     });
   </script>
 </body>

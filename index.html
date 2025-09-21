@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gaming Dashboard Music Player</title>
+  <title>SkySerenade - Playlist Audio Player</title>
   <script src="https://www.youtube.com/iframe_api"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -24,7 +24,6 @@
       position: relative;
     }
 
-    /* Background glow effects */
     body:before {
       content: '';
       position: fixed;
@@ -62,7 +61,6 @@
       50% { transform: translate(-30px, -20px) scale(1.05); }
     }
 
-    /* Main container */
     .dashboard-container {
       width: 900px;
       max-width: 95vw;
@@ -78,7 +76,6 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    /* Header section */
     .header {
       display: flex;
       justify-content: space-between;
@@ -158,7 +155,6 @@
       font-size: 16px;
     }
 
-    /* Main content grid */
     .content-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -166,7 +162,6 @@
       margin-bottom: 24px;
     }
 
-    /* Now Playing Card */
     .now-playing-card {
       background: linear-gradient(135deg, rgba(255, 71, 87, 0.2) 0%, rgba(255, 107, 122, 0.1) 100%);
       border: 1px solid rgba(255, 71, 87, 0.2);
@@ -240,8 +235,27 @@
       height: 4px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 2px;
-      overflow: hidden;
+      overflow: visible;
       margin-bottom: 8px;
+      position: relative;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+
+    .progress-container:hover {
+      height: 6px;
+    }
+
+    .progress-track {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      position: relative;
+      transition: height 0.2s ease;
+    }
+
+    .progress-container:hover .progress-track {
+      height: 6px;
     }
 
     .progress-bar {
@@ -249,14 +263,13 @@
       background: linear-gradient(90deg, #ff4757, #ff6b7a);
       border-radius: 2px;
       width: 0%;
-      transition: width 0.3s ease;
       position: relative;
+      pointer-events: none;
     }
 
-    .progress-bar:after {
-      content: '';
+    .progress-thumb {
       position: absolute;
-      right: 0;
+      right: -6px;
       top: 50%;
       transform: translateY(-50%);
       width: 12px;
@@ -264,6 +277,55 @@
       background: #ffffff;
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      opacity: 0;
+      pointer-events: auto;
+    }
+
+    .progress-container:hover .progress-thumb,
+    .progress-container.dragging .progress-thumb {
+      opacity: 1;
+      transform: translateY(-50%) scale(1.2);
+      box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
+    }
+
+    .progress-container.dragging .progress-thumb {
+      background: linear-gradient(135deg, #ff4757, #ff6b7a);
+      transform: translateY(-50%) scale(1.4);
+    }
+
+    .progress-preview {
+      position: absolute;
+      top: -35px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-50%);
+      transition: opacity 0.2s ease;
+      z-index: 100;
+    }
+
+    .progress-preview:after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid rgba(0, 0, 0, 0.8);
+    }
+
+    .progress-container:hover .progress-preview,
+    .progress-container.dragging .progress-preview {
+      opacity: 1;
     }
 
     .time-display {
@@ -338,7 +400,6 @@
       box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
     }
 
-    /* Sidebar Stats */
     .stats-card {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -377,7 +438,6 @@
       font-weight: 600;
     }
 
-    /* Album art with YouTube thumbnail */
     .album-art-section {
       display: flex;
       gap: 16px;
@@ -419,7 +479,6 @@
       color: rgba(255, 255, 255, 0.5);
     }
 
-    /* Volume control */
     .volume-section {
       display: flex;
       align-items: center;
@@ -458,7 +517,6 @@
       box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
     }
 
-    /* Error message */
     #error-message {
       color: #ff4757;
       font-size: 14px;
@@ -479,7 +537,6 @@
       left: -9999px;
     }
 
-    /* Queue section */
     .queue-section {
       grid-column: 1 / -1;
       background: rgba(255, 255, 255, 0.03);
@@ -507,7 +564,6 @@
       font-size: 14px;
     }
 
-    /* Responsive design */
     @media (max-width: 768px) {
       .dashboard-container {
         width: 100%;
@@ -543,13 +599,12 @@
 </head>
 <body>
   <div class="dashboard-container">
-    <!-- Header -->
     <div class="header">
       <div class="header-left">
         <div class="app-icon">♪</div>
         <div class="header-text">
           <div class="greeting">Good evening</div>
-          <div class="app-name">Music Dashboard</div>
+          <div class="app-name">SkySerenade</div>
         </div>
       </div>
       <div class="search-container">
@@ -559,9 +614,7 @@
       </div>
     </div>
 
-    <!-- Main Content Grid -->
     <div class="content-grid">
-      <!-- Now Playing Card -->
       <div class="now-playing-card">
         <div class="card-header">
           <div class="status-indicator"></div>
@@ -580,8 +633,12 @@
         </div>
 
         <div class="progress-section">
-          <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+          <div class="progress-container" id="progressContainer">
+            <div class="progress-track">
+              <div class="progress-bar" id="progressBar"></div>
+              <div class="progress-thumb" id="progressThumb"></div>
+              <div class="progress-preview" id="progressPreview">0:00</div>
+            </div>
           </div>
           <div class="time-display">
             <span id="currentTime">0:00</span>
@@ -603,7 +660,6 @@
         <div id="error-message"></div>
       </div>
 
-      <!-- Stats Card -->
       <div class="stats-card">
         <div class="stats-title">Your Statistics</div>
         <div class="stat-item">
@@ -625,7 +681,6 @@
       </div>
     </div>
 
-    <!-- Queue Section -->
     <div class="queue-section">
       <div class="queue-header">
         <div class="queue-title">Playlist Queue</div>
@@ -641,6 +696,7 @@
     let isPlayerReady = false;
     let progressInterval = null;
     let currentVideoId = null;
+    let isDragging = false;
 
     function formatTime(seconds) {
       const mins = Math.floor(seconds / 60);
@@ -656,14 +712,16 @@
         document.getElementById('currentTime').textContent = formatTime(current);
         document.getElementById('totalTime').textContent = formatTime(duration);
         
-        if (duration > 0) {
+        if (duration > 0 && !isDragging) {
           const progress = (current / duration) * 100;
-          document.getElementById('progressBar').style.width = progress + '%';
+          document.getElementById('progressBar').style.width = `${progress}%`;
+          document.getElementById('progressThumb').style.left = `calc(${progress}% - 6px)`;
         }
       }
     }
 
     function startProgressTracking() {
+      stopProgressTracking();
       progressInterval = setInterval(updateProgress, 1000);
     }
 
@@ -697,7 +755,6 @@
           albumArt.style.display = 'block';
           placeholder.style.display = 'none';
           
-          // Handle image load error (fallback to default thumbnail)
           albumArt.onerror = function() {
             this.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
             this.onerror = function() {
@@ -749,7 +806,6 @@
       document.getElementById('playPauseBtn').textContent = '▶';
       document.getElementById('playerStatus').textContent = 'Ready';
       
-      // Enable all controls
       document.getElementById('playPauseBtn').disabled = false;
       document.getElementById('nextBtn').disabled = false;
       document.getElementById('prevBtn').disabled = false;
@@ -786,14 +842,13 @@
       showError('Unable to load playlist. Please check the ID or try another playlist.');
       document.getElementById('playerStatus').textContent = 'Error';
       
-      // Disable controls
       document.getElementById('playPauseBtn').disabled = true;
       document.getElementById('nextBtn').disabled = true;
       document.getElementById('prevBtn').disabled = true;
       document.getElementById('volume').disabled = true;
       
-      // Reset progress
       document.getElementById('progressBar').style.width = '0%';
+      document.getElementById('progressThumb').style.left = '-6px';
       document.getElementById('currentTime').textContent = '0:00';
       document.getElementById('totalTime').textContent = '0:00';
       stopProgressTracking();
@@ -832,6 +887,89 @@
       errorElement.classList.remove('show');
     }
 
+    // Progress bar interaction
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressThumb = document.getElementById('progressThumb');
+    const progressPreview = document.getElementById('progressPreview');
+
+    function handleSeek(event) {
+      if (!isPlayerReady || !player || typeof player.getDuration !== 'function') return;
+
+      const rect = progressContainer.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const width = rect.width;
+      const seekPercentage = Math.max(0, Math.min(1, offsetX / width));
+      const duration = player.getDuration();
+      const seekTime = seekPercentage * duration;
+
+      if (typeof player.seekTo === 'function') {
+        player.seekTo(seekTime, true);
+        progressBar.style.width = `${seekPercentage * 100}%`;
+        progressThumb.style.left = `calc(${seekPercentage * 100}% - 6px)`;
+        document.getElementById('currentTime').textContent = formatTime(seekTime);
+      }
+    }
+
+    function updatePreview(event) {
+      const rect = progressContainer.getBoundingClientRect();
+      const offsetX = event.clientX - rect.left;
+      const width = rect.width;
+      const seekPercentage = Math.max(0, Math.min(1, offsetX / width));
+      const duration = player && typeof player.getDuration === 'function' ? player.getDuration() : 0;
+      const previewTime = seekPercentage * duration;
+
+      progressPreview.textContent = formatTime(previewTime);
+      progressPreview.style.left = `${seekPercentage * 100}%`;
+    }
+
+    progressContainer.addEventListener('click', (event) => {
+      if (isPlayerReady && player) {
+        handleSeek(event);
+      }
+    });
+
+    progressContainer.addEventListener('mousemove', (event) => {
+      if (isPlayerReady && player) {
+        updatePreview(event);
+      }
+    });
+
+    progressContainer.addEventListener('mouseenter', () => {
+      if (isPlayerReady && player) {
+        progressPreview.style.opacity = '1';
+      }
+    });
+
+    progressContainer.addEventListener('mouseleave', () => {
+      if (!isDragging) {
+        progressPreview.style.opacity = '0';
+      }
+    });
+
+    progressThumb.addEventListener('mousedown', (event) => {
+      if (isPlayerReady && player) {
+        isDragging = true;
+        progressContainer.classList.add('dragging');
+        updatePreview(event);
+      }
+    });
+
+    document.addEventListener('mousemove', (event) => {
+      if (isDragging && isPlayerReady && player) {
+        updatePreview(event);
+        handleSeek(event);
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        progressContainer.classList.remove('dragging');
+        progressPreview.style.opacity = '0';
+      }
+    });
+
     // Event listeners
     document.getElementById('loadBtn').addEventListener('click', () => {
       const input = document.getElementById('playlistInput').value;
@@ -847,8 +985,8 @@
       document.getElementById('track-meta').textContent = 'Please wait...';
       document.getElementById('playerStatus').textContent = 'Loading...';
       document.getElementById('progressBar').style.width = '0%';
+      document.getElementById('progressThumb').style.left = '-6px';
       
-      // Reset album art
       document.getElementById('albumArt').style.display = 'none';
       document.getElementById('albumPlaceholder').style.display = 'flex';
       currentVideoId = null;
@@ -876,6 +1014,7 @@
           updateAlbumArt();
         }, 500);
         document.getElementById('progressBar').style.width = '0%';
+        document.getElementById('progressThumb').style.left = '-6px';
       }
     });
 
@@ -887,6 +1026,7 @@
           updateAlbumArt();
         }, 500);
         document.getElementById('progressBar').style.width = '0%';
+        document.getElementById('progressThumb').style.left = '-6px';
       }
     });
 
@@ -895,10 +1035,9 @@
       if (isPlayerReady && player && typeof player.setVolume === 'function') {
         player.setVolume(volume);
       }
-      document.getElementById('volumeDisplay').textContent = volume + '%';
+      document.getElementById('volumeDisplay').textContent = `${volume}%`;
     });
 
-    // Enter key support for playlist input
     document.getElementById('playlistInput').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         document.getElementById('loadBtn').click();

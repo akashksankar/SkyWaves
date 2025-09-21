@@ -29,8 +29,8 @@
       position: fixed;
       top: 10%;
       left: 10%;
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       background: radial-gradient(circle, rgba(255, 71, 87, 0.1) 0%, transparent 70%);
       border-radius: 50%;
       animation: float1 8s ease-in-out infinite;
@@ -42,8 +42,8 @@
       position: fixed;
       bottom: 10%;
       right: 10%;
-      width: 400px;
-      height: 400px;
+      width: 250px;
+      height: 250px;
       background: radial-gradient(circle, rgba(74, 144, 226, 0.08) 0%, transparent 70%);
       border-radius: 50%;
       animation: float2 10s ease-in-out infinite;
@@ -52,13 +52,13 @@
 
     @keyframes float1 {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -30px) scale(1.1); }
-      66% { transform: translate(-20px, 20px) scale(0.9); }
+      33% { transform: translate(20px, -20px) scale(1.1); }
+      66% { transform: translate(-15px, 15px) scale(0.9); }
     }
 
     @keyframes float2 {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-30px, -20px) scale(1.05); }
+      50% { transform: translate(-20px, -15px) scale(1.05); }
     }
 
     .dashboard-container {
@@ -68,11 +68,11 @@
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 24px;
-      padding: 32px;
+      padding: 24px;
       position: relative;
       z-index: 10;
       box-shadow: 
-        0 20px 60px rgba(0, 0, 0, 0.3),
+        0 15px 50px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
@@ -80,27 +80,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
     .app-icon {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       background: linear-gradient(135deg, #ff4757, #ff6b7a);
-      border-radius: 12px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
-      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+      box-shadow: 0 6px 15px rgba(255, 71, 87, 0.3);
     }
 
     .header-text {
@@ -108,29 +110,50 @@
     }
 
     .greeting {
-      font-size: 14px;
+      font-size: 12px;
       opacity: 0.7;
       margin-bottom: 4px;
     }
 
     .app-name {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
+    }
+
+    .home-btn {
+      background: linear-gradient(135deg, #4a90e2, #357abd);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      background: linear-gradient(135deg, #357abd, #4a90e2);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
     }
 
     .search-container {
       position: relative;
+      flex: 1;
+      max-width: 300px;
     }
 
     #playlistInput {
-      width: 320px;
-      padding: 12px 16px 12px 44px;
+      width: 100%;
+      padding: 10px 12px 10px 36px;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
+      border-radius: 10px;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
       outline: none;
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
@@ -148,28 +171,28 @@
 
     .search-icon {
       position: absolute;
-      left: 16px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
       color: rgba(255, 255, 255, 0.5);
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .content-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
-      gap: 24px;
-      margin-bottom: 24px;
+      gap: 16px;
+      margin-bottom: 16px;
     }
 
     .now-playing-card {
       background: linear-gradient(135deg, rgba(255, 71, 87, 0.2) 0%, rgba(255, 107, 122, 0.1) 100%);
       border: 1px solid rgba(255, 71, 87, 0.2);
       border-radius: 16px;
-      padding: 24px;
+      padding: 16px;
       position: relative;
       overflow: hidden;
-      min-height: 200px;
+      min-height: 180px;
     }
 
     .now-playing-card:before {
@@ -177,18 +200,18 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
       border-radius: 50%;
-      transform: translate(40px, -40px);
+      transform: translate(30px, -30px);
     }
 
     .card-header {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .status-indicator {
@@ -206,62 +229,63 @@
 
     .card-title {
       color: #ffffff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
 
     .track-info {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     #current-track {
       color: #ffffff;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 500;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       line-height: 1.4;
     }
 
     .track-meta {
       color: rgba(255, 255, 255, 0.7);
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .progress-section {
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .progress-container {
-      height: 4px;
+      height: 6px;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
+      border-radius: 3px;
       overflow: visible;
       margin-bottom: 8px;
       position: relative;
       cursor: pointer;
-      padding: 8px 0;
+      padding: 10px 0;
+      touch-action: none;
     }
 
     .progress-container:hover {
-      height: 6px;
+      height: 8px;
     }
 
     .progress-track {
-      height: 4px;
+      height: 6px;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
+      border-radius: 3px;
       position: relative;
       transition: height 0.2s ease;
     }
 
     .progress-container:hover .progress-track {
-      height: 6px;
+      height: 8px;
     }
 
     .progress-bar {
       height: 100%;
       background: linear-gradient(90deg, #ff4757, #ff6b7a);
-      border-radius: 2px;
+      border-radius: 3px;
       width: 0%;
       position: relative;
       pointer-events: none;
@@ -269,11 +293,11 @@
 
     .progress-thumb {
       position: absolute;
-      right: -6px;
+      right: -8px;
       top: 50%;
       transform: translateY(-50%);
-      width: 12px;
-      height: 12px;
+      width: 16px;
+      height: 16px;
       background: #ffffff;
       border-radius: 50%;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -297,12 +321,12 @@
 
     .progress-preview {
       position: absolute;
-      top: -35px;
+      top: -30px;
       background: rgba(0, 0, 0, 0.8);
       color: white;
       padding: 4px 8px;
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 11px;
       pointer-events: none;
       opacity: 0;
       transform: translateX(-50%);
@@ -331,30 +355,32 @@
     .time-display {
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: 11px;
       color: rgba(255, 255, 255, 0.6);
     }
 
     .controls-section {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .control-btn {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border: none;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.1);
       color: #ffffff;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       backdrop-filter: blur(10px);
+      touch-action: manipulation;
     }
 
     .control-btn:hover:not(:disabled) {
@@ -368,10 +394,10 @@
     }
 
     #playPauseBtn {
-      width: 56px;
-      height: 56px;
+      width: 60px;
+      height: 60px;
       background: linear-gradient(135deg, #ff4757, #ff6b7a);
-      font-size: 18px;
+      font-size: 20px;
       box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
     }
 
@@ -385,41 +411,42 @@
       background: linear-gradient(135deg, #4a90e2, #357abd);
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 10px 20px;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
       margin-left: auto;
+      touch-action: manipulation;
     }
 
     .load-btn:hover {
       background: linear-gradient(135deg, #357abd, #4a90e2);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+      box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
     }
 
     .stats-card {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
-      padding: 24px;
+      padding: 16px;
       backdrop-filter: blur(10px);
     }
 
     .stats-title {
       color: #ffffff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .stat-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 0;
+      padding: 10px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -429,25 +456,25 @@
 
     .stat-label {
       color: rgba(255, 255, 255, 0.7);
-      font-size: 14px;
+      font-size: 12px;
     }
 
     .stat-value {
       color: #ffffff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
 
     .album-art-section {
       display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
+      gap: 12px;
+      margin-bottom: 16px;
     }
 
     .album-art-container {
-      width: 120px;
-      height: 120px;
-      border-radius: 12px;
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
       overflow: hidden;
       position: relative;
       flex-shrink: 0;
@@ -461,7 +488,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 10px;
       transition: all 0.3s ease;
     }
 
@@ -475,36 +502,37 @@
     }
 
     .album-placeholder {
-      font-size: 32px;
+      font-size: 28px;
       color: rgba(255, 255, 255, 0.5);
     }
 
     .volume-section {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 16px;
+      gap: 10px;
+      margin-top: 12px;
     }
 
     .volume-icon {
       color: rgba(255, 255, 255, 0.7);
-      font-size: 16px;
+      font-size: 14px;
     }
 
     #volume {
       flex: 1;
-      height: 4px;
+      height: 6px;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
+      border-radius: 3px;
       outline: none;
       -webkit-appearance: none;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     #volume::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: linear-gradient(135deg, #ff4757, #ff6b7a);
       cursor: pointer;
@@ -519,7 +547,7 @@
 
     #error-message {
       color: #ff4757;
-      font-size: 14px;
+      font-size: 12px;
       margin-top: 8px;
       padding: 8px 12px;
       background: rgba(255, 71, 87, 0.1);
@@ -542,57 +570,142 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 16px;
-      padding: 24px;
+      padding: 16px;
       backdrop-filter: blur(10px);
-    }
-
-    .queue-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
     }
 
     .queue-title {
       color: #ffffff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
 
     .queue-info {
       color: rgba(255, 255, 255, 0.6);
-      font-size: 14px;
+      font-size: 12px;
     }
 
     @media (max-width: 768px) {
       .dashboard-container {
         width: 100%;
-        padding: 20px;
-        margin: 16px;
+        padding: 16px;
+        margin: 12px;
       }
 
       .content-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      #playlistInput {
-        width: 100%;
+        gap: 12px;
       }
 
       .header {
         flex-direction: column;
-        gap: 16px;
         align-items: stretch;
+        gap: 12px;
+      }
+
+      .search-container {
+        max-width: 100%;
       }
 
       .album-art-section {
         flex-direction: column;
+        align-items: center;
+      }
+
+      .album-art-container {
+        width: 80%;
+        height: 160px;
+      }
+
+      .control-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+      }
+
+      #playPauseBtn {
+        width: 52px;
+        height: 52px;
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .dashboard-container {
+        padding: 12px;
+        margin: 8px;
+      }
+
+      .app-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+
+      .app-name {
+        font-size: 16px;
+      }
+
+      .greeting {
+        font-size: 11px;
+      }
+
+      .home-btn, .load-btn {
+        padding: 8px 16px;
+        font-size: 12px;
       }
 
       .album-art-container {
         width: 100%;
-        height: 200px;
+        height: 140px;
+      }
+
+      #current-track {
+        font-size: 14px;
+      }
+
+      .track-meta {
+        font-size: 11px;
+      }
+
+      .progress-container {
+        height: 8px;
+      }
+
+      .progress-track {
+        height: 8px;
+      }
+
+      .progress-thumb {
+        width: 18px;
+        height: 18px;
+        right: -9px;
+      }
+
+      .progress-preview {
+        font-size: 10px;
+        top: -28px;
+      }
+
+      .control-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+
+      #playPauseBtn {
+        width: 48px;
+        height: 48px;
+        font-size: 16px;
+      }
+
+      #volume {
+        height: 8px;
+      }
+
+      #volume::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
       }
     }
   </style>
@@ -604,13 +717,16 @@
         <div class="app-icon">♪</div>
         <div class="header-text">
           <div class="greeting">Good evening</div>
-          <div class="app-name">SkySerenade</div>
+          <div class="app-name">Skywave</div>
         </div>
       </div>
       <div class="search-container">
         <span class="search-icon">🔍</span>
         <input type="text" id="playlistInput" placeholder="Enter YouTube Playlist ID or URL">
-        <button class="load-btn" id="loadBtn">Load Playlist</button>
+        <div>
+          <a href="home.html" class="home-btn">Home</a>
+          <button class="load-btn" id="loadBtn">Load Playlist</button>
+        </div>
       </div>
     </div>
 
@@ -715,7 +831,7 @@
         if (duration > 0 && !isDragging) {
           const progress = (current / duration) * 100;
           document.getElementById('progressBar').style.width = `${progress}%`;
-          document.getElementById('progressThumb').style.left = `calc(${progress}% - 6px)`;
+          document.getElementById('progressThumb').style.left = `calc(${progress}% - 8px)`;
         }
       }
     }
@@ -848,7 +964,7 @@
       document.getElementById('volume').disabled = true;
       
       document.getElementById('progressBar').style.width = '0%';
-      document.getElementById('progressThumb').style.left = '-6px';
+      document.getElementById('progressThumb').style.left = '-8px';
       document.getElementById('currentTime').textContent = '0:00';
       document.getElementById('totalTime').textContent = '0:00';
       stopProgressTracking();
@@ -887,7 +1003,6 @@
       errorElement.classList.remove('show');
     }
 
-    // Progress bar interaction
     const progressContainer = document.getElementById('progressContainer');
     const progressBar = document.getElementById('progressBar');
     const progressThumb = document.getElementById('progressThumb');
@@ -897,7 +1012,7 @@
       if (!isPlayerReady || !player || typeof player.getDuration !== 'function') return;
 
       const rect = progressContainer.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
+      const offsetX = event.type.includes('touch') ? event.touches[0].clientX - rect.left : event.clientX - rect.left;
       const width = rect.width;
       const seekPercentage = Math.max(0, Math.min(1, offsetX / width));
       const duration = player.getDuration();
@@ -906,33 +1021,35 @@
       if (typeof player.seekTo === 'function') {
         player.seekTo(seekTime, true);
         progressBar.style.width = `${seekPercentage * 100}%`;
-        progressThumb.style.left = `calc(${seekPercentage * 100}% - 6px)`;
+        progressThumb.style.left = `calc(${seekPercentage * 100}% - 8px)`;
         document.getElementById('currentTime').textContent = formatTime(seekTime);
       }
     }
 
     function updatePreview(event) {
+      if (!isPlayerReady || !player || typeof player.getDuration !== 'function') return;
+
       const rect = progressContainer.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left;
+      const offsetX = event.type.includes('touch') ? event.touches[0].clientX - rect.left : event.clientX - rect.left;
       const width = rect.width;
       const seekPercentage = Math.max(0, Math.min(1, offsetX / width));
-      const duration = player && typeof player.getDuration === 'function' ? player.getDuration() : 0;
+      const duration = player.getDuration();
       const previewTime = seekPercentage * duration;
 
       progressPreview.textContent = formatTime(previewTime);
       progressPreview.style.left = `${seekPercentage * 100}%`;
     }
 
-    progressContainer.addEventListener('click', (event) => {
-      if (isPlayerReady && player) {
-        handleSeek(event);
-      }
+    progressContainer.addEventListener('click', handleSeek);
+    progressContainer.addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      handleSeek(event);
     });
 
-    progressContainer.addEventListener('mousemove', (event) => {
-      if (isPlayerReady && player) {
-        updatePreview(event);
-      }
+    progressContainer.addEventListener('mousemove', updatePreview);
+    progressContainer.addEventListener('touchmove', (event) => {
+      event.preventDefault();
+      updatePreview(event);
     });
 
     progressContainer.addEventListener('mouseenter', () => {
@@ -955,8 +1072,25 @@
       }
     });
 
+    progressThumb.addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      if (isPlayerReady && player) {
+        isDragging = true;
+        progressContainer.classList.add('dragging');
+        updatePreview(event);
+      }
+    });
+
     document.addEventListener('mousemove', (event) => {
       if (isDragging && isPlayerReady && player) {
+        updatePreview(event);
+        handleSeek(event);
+      }
+    });
+
+    document.addEventListener('touchmove', (event) => {
+      if (isDragging && isPlayerReady && player) {
+        event.preventDefault();
         updatePreview(event);
         handleSeek(event);
       }
@@ -970,7 +1104,14 @@
       }
     });
 
-    // Event listeners
+    document.addEventListener('touchend', () => {
+      if (isDragging) {
+        isDragging = false;
+        progressContainer.classList.remove('dragging');
+        progressPreview.style.opacity = '0';
+      }
+    });
+
     document.getElementById('loadBtn').addEventListener('click', () => {
       const input = document.getElementById('playlistInput').value;
       const playlistId = extractPlaylistId(input);
@@ -985,7 +1126,7 @@
       document.getElementById('track-meta').textContent = 'Please wait...';
       document.getElementById('playerStatus').textContent = 'Loading...';
       document.getElementById('progressBar').style.width = '0%';
-      document.getElementById('progressThumb').style.left = '-6px';
+      document.getElementById('progressThumb').style.left = '-8px';
       
       document.getElementById('albumArt').style.display = 'none';
       document.getElementById('albumPlaceholder').style.display = 'flex';
@@ -1014,7 +1155,7 @@
           updateAlbumArt();
         }, 500);
         document.getElementById('progressBar').style.width = '0%';
-        document.getElementById('progressThumb').style.left = '-6px';
+        document.getElementById('progressThumb').style.left = '-8px';
       }
     });
 
@@ -1026,7 +1167,7 @@
           updateAlbumArt();
         }, 500);
         document.getElementById('progressBar').style.width = '0%';
-        document.getElementById('progressThumb').style.left = '-6px';
+        document.getElementById('progressThumb').style.left = '-8px';
       }
     });
 

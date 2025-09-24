@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Developer - Akash Sankar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #1a1a2e 75%, #0f0f23 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background elements */
+    .bg-elements {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-code {
+      position: absolute;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: rgba(100, 255, 218, 0.1);
+      animation: floatCode 15s linear infinite;
+      user-select: none;
+    }
+
+    @keyframes floatCode {
+      0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.3; }
+      100% {
+        transform: translateY(-10vh) translateX(50px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.6;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+
+    .glow-orb.primary {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(100, 255, 218, 0.3) 0%, transparent 70%);
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .glow-orb.secondary {
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, transparent 70%);
+      bottom: 30%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    .glow-orb.tertiary {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(255, 105, 180, 0.2) 0%, transparent 70%);
+      top: 60%;
+      left: 70%;
+      animation-delay: 4s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.1); }
+      66% { transform: translate(-20px, 30px) scale(0.9); }
+    }
+
+    /* Navigation */
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 15, 35, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px 32px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #64ffda;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .nav-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #64ffda, #8a2be2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(100, 255, 218, 0); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-link:hover:before {
+      left: 100%;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #64ffda;
+      background: rgba(100, 255, 218, 0.1);
+    }
+
+    /* Main container */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 32px 32px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Developer profile section */
+    .developer-section {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .developer-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      animation: cardFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .developer-card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #64ffda, #8a2be2, #ff69b4);
+      background-size: 200% 100%;
+      animation: gradientSlide 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientSlide {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .profile-image-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 16px;
+      position: relative;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #64ffda, #8a2be2);
+      padding: 3px;
+      animation: imageRotate 10s linear infinite;
+    }
+
+    @keyframes imageRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .profile-image-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #64ffda;
+      position: relative;
+      animation: imageRotateReverse 10s linear infinite;
+    }
+
+    @keyframes imageRotateReverse {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+
+    .verified-badge {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #64ffda, #32cd32);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: white;
+      box-shadow: 0 4px 20px rgba(100, 255, 218, 0.4);
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); box-shadow: 0 6px 25px rgba(100, 255, 218, 0.6); }
+    }
+
+    .developer-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #64ffda, #8a2be2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      animation: textShimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes textShimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .developer-title {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .verified-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #64ffda;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .verified-icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #64ffda, #32cd32);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: white;
+    }
+
+    .developer-bio {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+      background: rgba(100, 255, 218, 0.05);
+      border-color: rgba(100, 255, 218, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .stat-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: #64ffda;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link:before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #64ffda, #8a2be2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .social-link:hover:before {
+      opacity: 0.2;
+    }
+
+    .social-link:hover {
+      color: #64ffda;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(100, 255, 218, 0.3);
+    }
+
+    /* Contact forms section */
+    .contact-section {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 32px;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 16px;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .forms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .form-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .form-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .form-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: white;
+    }
+
+    .form-icon.contact {
+      background: linear-gradient(135deg, #64ffda, #4dd0e1);
+    }
+
+    .form-icon.bug {
+      background: linear-gradient(135deg, #ff6b6b, #ffa726);
+    }
+
+    .form-title {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(100, 255, 218, 0.5);
+      box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
+    }
+
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-select {
+      cursor: pointer;
+    }
+
+    .form-select option {
+      background: #1a1a2e;
+      color: #ffffff;
+    }
+
+    .priority-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-left: 8px;
+    }
+
+    .priority-low { background: rgba(76, 175, 80, 0.2); color: #4caf50; }
+    .priority-medium { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
+    .priority-high { background: rgba(244, 67, 54, 0.2); color: #f44336; }
+    .priority-critical { background: rgba(156, 39, 176, 0.2); color: #9c27b0; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #64ffda, #4dd0e1);
+      color: #0f0f23;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .submit-btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .submit-btn:hover:before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #4dd0e1, #64ffda);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(100, 255, 218, 0.4);
+    }
+
+    .submit-btn.bug {
+      background: linear-gradient(135deg, #ff6b6b, #ffa726);
+      color: white;
+    }
+
+    .submit-btn.bug:hover {
+      background: linear-gradient(135deg, #ffa726, #ff6b6b);
+    }
+
+    /* Success/Error messages */
+    .message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 16px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    .message.show {
+      opacity: 1;
+      transform: translateY(0);
+      display: block;
+    }
+
+    .message.success {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    .message.error {
+      background: rgba(244, 67, 54, 0.2);
+      color: #f44336;
+      border: 1px solid rgba(244, 67, 54, 0.3);
+    }
+
+    /* Loading state */
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #64ffda;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 968px) {
+      .developer-section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .forms-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 80px 16px 16px;
+      }
+
+      .nav-bar {
+        padding: 12px 16px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .developer-card, .contact-section {
+        padding: 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background elements -->
+  <div class="bg-elements">
+    <div class="glow-orb primary"></div>
+    <div class="glow-orb secondary"></div>
+    <div class="glow-orb tertiary"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">👨‍💻</div>
+      <span>Dev Contact</span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link">🎵 Music Player</a>
+      <a href="#" class="nav-link">🤖 AI Assistant</a>
+      <a href="#" class="nav-link active">👨‍💻 Developer</a>
+      <a href="#" class="nav-link">📊 Analytics</a>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <!-- Developer Profile Section -->
+    <div class="developer-section">
+      <div class="developer-card">
+        <div class="profile-header">
+          <div class="profile-image-container">
+            <div class="profile-image-placeholder">
+              👨‍💻
+            </div>
+            <div class="verified-badge">✓</div>
+          </div>
+          <h1 class="developer-name">Akash Sankar</h1>
+          <p class="developer-title">Full Stack Developer & Music Enthusiast</p>
+          <div class="verified-status">
+            <div class="verified-icon">✓</div>
+            <span>Verified Developer</span>
+          </div>
+        </div>
+
+        <div class="developer-bio">
+          Meet Akash - the caffeine-powered code wizard who thinks semicolons are overrated and believes every bug is just an undocumented feature waiting to be discovered. When not wrestling with APIs or making pixels dance, you'll find him curating the perfect coding playlist and wondering why CSS still surprises him after all these years. 🎵💻
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">42</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Coffee Consumed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">404</div>
+            <div class="stat-label">Bugs Fixed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Music Playing</div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" class="social-link" title="GitHub">📱</a>
+          <a href="#" class="social-link" title="LinkedIn">💼</a>
+          <a href="#" class="social-link" title="Twitter">🐦</a>
+          <a href="#" class="social-link" title="Email">📧</a>
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <div class="section-header">
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="section-subtitle">
+            Have questions about the music player, found a bug, or just want to chat about code and music? Drop a message below!
+          </p>
+        </div>
+
+        <div class="forms-grid">
+          <!-- Contact Form -->
+          <div class="form-card">
+            <div class="form-header">
+              <div class="form-icon contact">💬</div>
+              <div class="form-title">General Contact</div>
+            </div>
+            
+            <form id="contactForm">
+              <div class="form-group">
+                <label class="form-label" for="contactName">Your Name</label>
+                <input type="text" id="contactName" class="form-input" placeholder="Enter your name" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="contactEmail">Email Address</label>
+                <input type="email" id="contactEmail" class="form-input" placeholder="your@email.com" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="contactSubject">Subject</label>
+                <input type="text" id="contactSubject" class="form-input" placeholder="What's this about?" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="contactMessage">Message</label>
+                <textarea id="contactMessage" class="form-textarea" placeholder="Tell me what's on your mind..." required></textarea>
+              </div>
+              
+              <button type="submit" class="submit-btn">
+                Send Message
+              </button>
+              
+              <div class="message" id="contactMessage"></div>
+            </form>
+          </div>
+
+          <!-- Bug Report Form -->
+          <div class="form-card">
+            <div class="form-header">
+              <div class="form-icon bug">🐛</div>
+              <div class="form-title">Bug Report</div>
+            </div>
+            
+            <form id="bugForm">
+              <div class="form-group">
+                <label class="form-label" for="bugReporter">Your Name</label>
+                <input type="text" id="bugReporter" class="form-input" placeholder="Bug hunter extraordinaire" required>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="bugEmail">Email (Optional)</label>
+                <input type="email" id="bugEmail" class="form-input" placeholder="your@email.com">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="bugType">Bug Category</label>
+                <select id="bugType" class="form-select" required>
+                  <option value="">Select bug type...</option>
+                  <option value="ui">🎨 UI/UX Issue</option>
+                  <option value="functionality">⚙️ Functionality Bug</option>
+                  <option value="performance">⚡ Performance Issue</option>
+                  <option value="compatibility">📱 Browser Compatibility</option>
+                  <option value="audio">🎵 Audio/Player Issue</option>
+                  <option value="api">🔌 API/Integration Bug</option>
+                  <option value="other">❓ Other</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="bugPriority">Priority Level</label>
+                <select id="bugPriority" class="form-select" required>
+                  <option value="">How urgent is this?</option>
+                  <option value="low">🟢 Low - Minor annoyance</option>
+                  <option value="medium">🟡 Medium - Affects usability</option>
+                  <option value="high">🟠 High - Breaks functionality</option>
+                  <option value="

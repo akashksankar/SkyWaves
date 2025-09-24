@@ -243,17 +243,11 @@
       to { transform: rotate(360deg); }
     }
 
-    .profile-image-placeholder {
+    .profile-image {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      color: #64ffda;
+      object-fit: cover;
       position: relative;
       animation: imageRotateReverse 10s linear infinite;
     }
@@ -732,9 +726,7 @@
       <div class="developer-card">
         <div class="profile-header">
           <div class="profile-image-container">
-            <div class="profile-image-placeholder">
-              👨‍💻
-            </div>
+            <img src="https://i.ibb.co/3D2V4NN/IMG-20250924-073751.jpg" alt="Akash Sankar" class="profile-image" />
             <div class="verified-badge">✓</div>
           </div>
           <h1 class="developer-name">Akash Sankar</h1>
@@ -817,7 +809,7 @@
                 Send Message
               </button>
               
-              <div class="message" id="contactMessage"></div>
+              <div class="message" id="contactMessageResult"></div>
             </form>
           </div>
 
@@ -860,4 +852,8 @@
                   <option value="low">🟢 Low - Minor annoyance</option>
                   <option value="medium">🟡 Medium - Affects usability</option>
                   <option value="high">🟠 High - Breaks functionality</option>
-                  <option value="
+                  <option value="critical">🔴 Critical - App unusable</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
